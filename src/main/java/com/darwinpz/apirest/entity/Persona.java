@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "persona")
@@ -18,15 +20,19 @@ public class Persona {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @NotBlank
     @Column(unique = true, length = 10)
     private String identificacion;
     
+    @NotBlank
     @Column(length = 50, nullable = false)
     private String nombre;
     
+    @NotBlank
     @Column(nullable = false)
     private String genero;
     
+    @Positive
     @Column(nullable = false)
     private int edad;
     

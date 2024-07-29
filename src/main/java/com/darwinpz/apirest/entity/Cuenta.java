@@ -10,6 +10,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name = "cuenta")
@@ -19,15 +23,19 @@ public class Cuenta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Positive
 	@Column(nullable = false, unique = true)
     private int numeroCuenta;
     
+	@NotBlank
     @Column(nullable = false)
     private String tipoCuenta;
     
+	@PositiveOrZero
     @Column(nullable = false)
     private double saldoInicial;
     
+	@NotNull
     @Column(nullable = false)
     private boolean estado;
     

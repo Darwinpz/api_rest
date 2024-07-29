@@ -3,6 +3,7 @@ package com.darwinpz.apirest.entity;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.NumberFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "movimiento")
@@ -24,9 +26,11 @@ public class Movimiento {
     @Column(updatable = false)
     private LocalDateTime fecha;
 
+    @NotBlank
     @Column(nullable = false)
     private String tipoMovimiento;
     
+    @NumberFormat
     @Column(nullable = false)
     private double valor;
     

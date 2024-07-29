@@ -5,13 +5,17 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Cliente extends Persona{
 
+	@NotBlank
 	@Column(nullable = false, length = 20)
     private String clave;
     
+	@NotNull
     @Column(nullable = false)
     private boolean estado;
     
