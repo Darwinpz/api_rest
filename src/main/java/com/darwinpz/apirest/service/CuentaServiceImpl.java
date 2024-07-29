@@ -1,5 +1,6 @@
 package com.darwinpz.apirest.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.darwinpz.apirest.entity.Cliente;
 import com.darwinpz.apirest.entity.Cuenta;
 import com.darwinpz.apirest.repository.CuentaRepository;
 
@@ -51,6 +53,11 @@ public class CuentaServiceImpl implements CuentaService{
 	@Transactional(readOnly = true)
 	public Optional<Cuenta> findByNumeroCuenta(int numeroCuenta) {
 		return cuentaRepository.findByNumeroCuenta(numeroCuenta);
+	}
+
+	@Override
+	public List<Cuenta> findByCliente(Cliente cliente) {
+		return cuentaRepository.findByCliente(cliente);
 	}
 
 

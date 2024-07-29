@@ -59,6 +59,19 @@ public class CuentaController {
 	        if(!cuenta.getTipoCuenta().equalsIgnoreCase("Ahorros") && !cuenta.getTipoCuenta().equalsIgnoreCase("Corriente")) {
 	        	 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La cuenta debe ser de Ahorros o Corriente");
 	        }
+	       
+	        List<Cuenta> list_cuentas = cuentaService.findByCliente(oCliente.get());
+
+	        boolean existeCuentaDelMismoTipo = list_cuentas.stream()
+	            .anyMatch(c -> c.getTipoCuenta().equalsIgnoreCase(cuenta.getTipoCuenta()));
+
+	        if (existeCuentaDelMismoTipo) {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se puede crear más cuentas de "+ cuenta.getTipoCuenta());
+	        }
+
+	        if (list_cuentas.size() >= 2) {
+	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se puede crear más cuentas");
+	        }
 	        
 			cuentaService.save(cuenta);
 			return ResponseEntity.status(HttpStatus.CREATED).body("Cuenta creada correctamente");
