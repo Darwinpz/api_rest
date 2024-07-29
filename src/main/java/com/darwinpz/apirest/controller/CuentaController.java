@@ -55,7 +55,11 @@ public class CuentaController {
 	        if (cuenta.getSaldoInicial() < 0) {
 	            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El saldo inicial no puede ser negativo");
 	        }
-			
+	        
+	        if(!cuenta.getTipoCuenta().equalsIgnoreCase("Ahorros") && !cuenta.getTipoCuenta().equalsIgnoreCase("Corriente")) {
+	        	 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La cuenta debe ser de Ahorros o Corriente");
+	        }
+	        
 			cuentaService.save(cuenta);
 			return ResponseEntity.status(HttpStatus.CREATED).body("Cuenta creada correctamente");
 			
