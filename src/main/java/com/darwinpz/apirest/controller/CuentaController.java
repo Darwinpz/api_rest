@@ -86,7 +86,6 @@ public class CuentaController {
 			Optional<Cuenta> oCuenta = cuentaService.findById(numeroCuenta);
 			if(!oCuenta.isPresent()) return ResponseEntity.notFound().build();
 			
-			oCuenta.get().setTipoCuenta(cuenta.getTipoCuenta());
 			oCuenta.get().setEstado(cuenta.getEstado());
 			cuentaService.save(oCuenta.get());
 			return ResponseEntity.status(HttpStatus.CREATED).body("Cuenta actualizada correctamente");
